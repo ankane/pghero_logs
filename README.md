@@ -64,3 +64,17 @@ Once logs are downloaded, run
 ```sh
 cat logs/postgresql.log.* | pghero_logs
 ```
+
+To analyze with [PgBadger](https://github.com/dalibo/pgbadger), install
+
+```sh
+brew install pgbadger
+```
+
+And run
+
+```sh
+pgbadger --prefix "%t:%r:%u@%d:[%p]:" --outfile pgbadger.html logs/* && open pgbadger.html
+```
+
+Thanks to [RDS PgBadger](https://github.com/sportngin/rds-pgbadger) for the prefix.
