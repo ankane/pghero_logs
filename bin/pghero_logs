@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require "pghero_logs"
-PgHeroLogs.run(ARGV[0])
+PgHeroLogs.run(ARGV)

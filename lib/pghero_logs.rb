@@ -6,12 +6,13 @@ module PgHeroLogs
   class << self
     REGEX = /duration: (\d+\.\d+) ms  execute <unnamed>: (.+)?/i
 
-    def run(command)
+    def run(args)
+      command = args[0]
       case command
       when nil
         parse
       when "download"
-        download
+        download args[1]
       else
         abort "Unknown command: #{command}"
       end
@@ -19,15 +20,13 @@ module PgHeroLogs
 
     protected
 
-    def download
-      Dir.mkdir("logs") if !Dir.exists?("logs")
-
-      db_instance_identifier = ENV["AWS_DB_INSTANCE_IDENTIFIER"]
-      rds = AWS::RDS.new(access_key_id: ENV["AWS_ACCESS_KEY_ID"], secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"])
+    def download(db_instance_identifier)
+      db_instance_identifier ||= ENV["AWS_DB_INSTANCE_IDENTIFIER"]
+      rds = AWS::RDS.new
       resp = rds.client.describe_db_log_files(db_instance_identifier: db_instance_identifier)
       files = resp[:describe_db_log_files].map{|f| f[:log_file_name] }
       files.each do |log_file_name|
-        local_file_name = log_file_name.sub("error", "logs")
+        local_file_name = log_file_name.sub("error/", "")
         if File.exists?(local_file_name)
           puts "EXISTS #{local_file_name}"
         else
