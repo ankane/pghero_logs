@@ -38,7 +38,6 @@ First, download the logs. Create an IAM user with the policy below
 {
   "Statement": [
     {
-      "Sid": "Stmt1410669817271",
       "Action": [
         "rds:DescribeDBLogFiles",
         "rds:DownloadDBLogFilePortion"
@@ -72,7 +71,8 @@ brew install pgbadger
 And run
 
 ```sh
-pgbadger --prefix "%t:%r:%u@%d:[%p]:" --outfile pgbadger.html postgresql.log* && open pgbadger.html
+pgbadger --prefix "%t:%r:%u@%d:[%p]:" --outfile pgbadger.html postgresql.log*
+open pgbadger.html
 ```
 
 Thanks to [RDS PgBadger](https://github.com/sportngin/rds-pgbadger) for the prefix.
