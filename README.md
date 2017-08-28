@@ -34,7 +34,7 @@ cat /usr/local/var/postgres/server.log | pghero_logs
 
 First, download the logs. Create an IAM user with the policy below
 
-```sh
+```
 {
   "Statement": [
     {
