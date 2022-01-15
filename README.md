@@ -16,7 +16,7 @@ Total    Avg  Count  Query
 gem install pghero_logs
 ```
 
-It can take 10 minutes or more to compile the [query parser](https://pganalyze.com/blog/parse-postgresql-queries-in-ruby.html) :clock2:
+It can take a few minutes to compile the [query parser](https://pganalyze.com/blog/parse-postgresql-queries-in-ruby.html) :clock2:
 
 Tell Postgres to log slow queries in `postgresql.conf`
 
@@ -34,18 +34,19 @@ cat /usr/local/var/postgres/server.log | pghero_logs
 
 First, download the logs. Create an IAM user with the policy below
 
-```
+```json
 {
-  "Statement": [
-    {
-      "Action": [
-        "rds:DescribeDBLogFiles",
-        "rds:DownloadDBLogFilePortion"
-      ],
-      "Effect": "Allow",
-      "Resource": "*"
-    }
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "rds:DescribeDBLogFiles",
+                "rds:DownloadDBLogFilePortion"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        }
+    ]
 }
 ```
 
