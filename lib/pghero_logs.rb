@@ -7,7 +7,7 @@ require "pghero_logs/version"
 
 module PgHeroLogs
   class << self
-    REGEX = /duration: (\d+\.\d+) ms  execute <unnamed>: (.+)?/i
+    REGEX = /duration: (\d+\.\d+) ms  (?:statement|execute [^:]+): (.+)/
 
     def run(args)
       command = args[0]
