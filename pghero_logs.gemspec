@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = ["pghero_logs"]
 
-  spec.required_ruby_version = ">= 2.2"
+  spec.required_ruby_version = ">= 2.5"
 
   spec.add_dependency "pg_query"
   spec.add_dependency "aws-sdk", "~> 1"
