@@ -1,4 +1,4 @@
-## 0.2.0 (unreleased)
+## 0.2.0 (2022-01-14)
 
 - Added support for Ruby 3+
 - Improved error messages
