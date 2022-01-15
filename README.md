@@ -27,7 +27,7 @@ log_min_duration_statement = 20 # ms
 Analyze the logs
 
 ```sh
-cat /usr/local/var/postgres/server.log | pghero_logs
+cat /usr/local/var/log/postgres.log | pghero_logs
 ```
 
 ## Amazon RDS
