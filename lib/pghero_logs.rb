@@ -1,6 +1,9 @@
-require "pghero_logs/version"
-require "pg_query"
+# dependencies
 require "aws-sdk"
+require "pg_query"
+
+# modules
+require "pghero_logs/version"
 
 module PgHeroLogs
   class << self
@@ -96,6 +99,5 @@ module PgHeroLogs
     def squish(str)
       str.gsub(/\A[[:space:]]+/, '').gsub(/[[:space:]]+\z/, '').gsub(/[[:space:]]+/, ' ')
     end
-
   end
 end
