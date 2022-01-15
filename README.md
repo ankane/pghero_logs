@@ -10,13 +10,17 @@ Total    Avg  Count  Query
     4  12621     20  SELECT DISTINCT "order_deliveries"."id" AS t0_r0
 ```
 
-## Install
+## Installation
+
+Run:
 
 ```sh
 gem install pghero_logs
 ```
 
 It can take a few minutes to compile the [query parser](https://pganalyze.com/blog/parse-postgresql-queries-in-ruby.html) :clock2:
+
+## Getting Started
 
 Tell Postgres to log slow queries in `postgresql.conf`
 
@@ -77,3 +81,24 @@ open pgbadger.html
 ```
 
 Thanks to [RDS PgBadger](https://github.com/sportngin/rds-pgbadger) for the prefix.
+
+## History
+
+View the [changelog](https://github.com/ankane/pghero_logs/blob/master/CHANGELOG.md)
+
+## Contributing
+
+Everyone is encouraged to help improve this project. Here are a few ways you can help:
+
+- [Report bugs](https://github.com/ankane/pghero_logs/issues)
+- Fix bugs and [submit pull requests](https://github.com/ankane/pghero_logs/pulls)
+- Write, clarify, or fix documentation
+- Suggest or add new features
+
+To get started with development:
+
+```sh
+git clone https://github.com/ankane/pghero_logs.git
+cd pghero_logs
+bundle install
+```
