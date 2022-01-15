@@ -1,5 +1,5 @@
 # dependencies
-require "aws-sdk"
+require "aws-sdk-rds"
 require "pg_query"
 
 # modules
@@ -19,14 +19,16 @@ module PgHeroLogs
       else
         abort "Unknown command: #{command}"
       end
+    rescue Aws::RDS::Errors::AccessDenied, Aws::RDS::Errors::DBInstanceNotFound => e
+      abort e.message
     end
 
     protected
 
     def download(db_instance_identifier)
       db_instance_identifier ||= ENV["AWS_DB_INSTANCE_IDENTIFIER"]
-      rds = AWS::RDS.new
-      resp = rds.client.describe_db_log_files(db_instance_identifier: db_instance_identifier)
+      rds = Aws::RDS::Client.new
+      resp = rds.describe_db_log_files(db_instance_identifier: db_instance_identifier)
       files = resp[:describe_db_log_files].map{|f| f[:log_file_name] }
       files.each do |log_file_name|
         local_file_name = log_file_name.sub("error/", "")
@@ -41,10 +43,10 @@ module PgHeroLogs
               log_file_name: log_file_name
             }
             options.merge!(marker: marker) if marker
-            resp = rds.client.download_db_log_file_portion(options)
+            resp = rds.download_db_log_file_portion(options)
             data << resp[:log_file_data].to_s
           end while resp[:additional_data_pending] && (marker = resp[:marker])
-          File.open(local_file_name, "w") { |file| file.write(data) }
+          File.write(local_file_name, data)
           puts "DOWNLOADED #{local_file_name}"
         end
       end
